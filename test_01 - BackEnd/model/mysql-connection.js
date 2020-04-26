@@ -1,29 +1,23 @@
-var mysql = require('mysql');
+const mysql = require('mysql');
+const config = require('../config');
 
 module.exports = class mysqlConnection {
-    constructor() { }
+  constructor() { }
 
-    static mysqlConnect(cbConnect) {
+  static mysqlConnect(cbConnect) {
+    const con = mysql.createConnection(config.sqlConfig);
 
-     var con = mysql.createConnection({
-        host: "localhost",
-        port: "3306",
-        user: "root",
-        password: "nacho212",
-        database: "test_01"
-      });
+    con.connect(
+      function (err) {
+        if (err) {
+          cbConnect(null, err);
+        } else {
+          cbConnect(con, null);
+          //  console.log(con.state);
+        }
+      }
+    );
 
-      con.connect(
-        function (err) {
-          if (err){
-              cbConnect(null,err);
-          }else{
-              cbConnect(con,null);
-            //  console.log(con.state);
-          }          
-        }     
-      );
-      
-    }
+  }
 
 }
