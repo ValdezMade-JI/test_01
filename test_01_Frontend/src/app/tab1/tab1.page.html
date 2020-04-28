@@ -1,0 +1,17 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Categorias
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list *ngIf="categories">
+    <ion-item *ngFor="let c of categories">
+      {{c.name}}
+    </ion-item>
+  </ion-list>
+
+  <app-explore-container name="Tab 1 page"></app-explore-container>
+</ion-content>
